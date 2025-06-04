@@ -3,9 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fancy World Clock</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+            font-family: 'Arial', sans-serif;
+        }
+        .clock-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        .time {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .date {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .timezone {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .controls {
+            margin-top: 2rem;
+        }
+        .form-select {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .form-select:hover {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+        .form-select:focus {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1) !important;
+        }
+        .form-select option {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 10px;
+        }
+        /* Custom scrollbar for the select dropdown */
+        .form-select::-webkit-scrollbar {
+            width: 8px;
+        }
+        .form-select::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .form-select::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .form-select::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="clock-container">
+        <div class="timezone" id="timezone">Loading...</div>
+        <div class="time" id="time">00:00:00</div>
+        <div class="date" id="date">Loading...</div>
+        <div class="controls">
+            <select class="form-select" id="timezoneSelect">
+                <option value="America/New_York">New York</option>
+                <option value="Europe/London">London</option>
+                <option value="Asia/Tokyo">Tokyo</option>
+                <option value="Australia/Sydney">Sydney</option>
+                <option value="Europe/Paris">Paris</option>
+                <option value="Asia/Dubai">Dubai</option>
+                <option value="Asia/Singapore">Singapore</option>
+                <option value="Asia/Shanghai">Shanghai</option>
+                <option value="Europe/Berlin">Berlin</option>
+                <option value="Europe/Rome">Rome</option>
+                <option value="America/Los_Angeles">Los Angeles</option>
+                <option value="Asia/Seoul">Seoul</option>
+                <option value="Asia/Mumbai">Mumbai</option>
+                <option value="America/Sao_Paulo">São Paulo</option>
+                <option value="Africa/Cairo">Cairo</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function() {
+            const timezoneImages = {
+                'America/New_York': 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9',
+                'Europe/London': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad',
+                'Asia/Tokyo': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e',
+                'Australia/Sydney': 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9',
+                'Europe/Paris': 'https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f',
+                'Asia/Dubai': 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c',
+                'Asia/Singapore': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd',
+                'Asia/Shanghai': 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2',
+                'Europe/Berlin': 'https://images.unsplash.com/photo-1599946347371-68eb71b16afc',
+                'Europe/Rome': 'https://images.unsplash.com/photo-1552832230-c0197dd311b5',
+                'America/Los_Angeles': 'https://images.unsplash.com/photo-1502126324834-38f8e02d7160',
+                'Asia/Seoul': 'https://images.unsplash.com/photo-1538485399081-7c8edb0e1b1d',
+                'Asia/Mumbai': 'https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7',
+                'America/Sao_Paulo': 'https://images.unsplash.com/photo-1542051841857-5f90071e7989',
+                'Africa/Cairo': 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a'
+            };
+
+            function updateClock() {
+                const timezone = $('#timezoneSelect').val();
+                const now = new Date().toLocaleString('en-US', { timeZone: timezone });
+                const [date, time] = now.split(', ');
+                
+                $('#time').text(time);
+                $('#date').text(date);
+                $('#timezone').text(timezone.split('/').pop().replace('_', ' '));
+                
+                // Update background
+                $('body').css('background-image', `url(${timezoneImages[timezone]})`);
+            }
+
+            // Initial update
+            updateClock();
+
+            // Update every second
+            setInterval(updateClock, 1000);
+
+            // Handle timezone change
+            $('#timezoneSelect').change(updateClock);
+        });
+    </script>
 </body>
-</html>
+</html> 
