@@ -15,7 +15,7 @@ Certainly! Here's a professional and informative `README.md` file for your [Cloc
 
 ## 🚀 Live Demo
 
-Experience the Fancy Clock in action: [kenilgopanii.github.io](https://kenilgopanii.github.io)
+Experience the Fancy Clock in action: [kenilgopanii.github.io](https://kenilgopanii.github.io/Clock)
 
 ## 🛠️ Built With
 
