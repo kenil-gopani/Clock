@@ -1,7 +1,3 @@
-Certainly! Here's a professional and informative `README.md` file for your [Clock](https://github.com/kenil-gopani/Clock) project:
-
----
-
 # ⏰ Fancy Clock
 
 **Fancy Clock** is a sleek and responsive digital clock web application that displays the current time with elegance. Built using modern web technologies, it offers a visually appealing interface suitable for various devices.
