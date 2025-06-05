@@ -1,0 +1,210 @@
+body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden;
+        }
+        .clock-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5),
+                        inset 0 0 20px rgba(255, 255, 255, 0.1);
+            color: white;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .digital-clock {
+            flex: 1;
+            text-align: left;
+        }
+        .clock-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.03),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .time {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            background: linear-gradient(45deg, #fff, #a8a8a8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: 3px;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .date {
+            font-size: 1.4rem;
+            margin: 0.5rem 0;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+        .timezone {
+            font-size: 1.2rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+        }
+        .controls {
+            margin-top: 1.5rem;
+        }
+        .form-select {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        .form-select:hover {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            transform: translateY(-2px);
+        }
+        .form-select:focus {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1) !important;
+        }
+        .form-select option {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Analog Clock Styles */
+        .analog-clock {
+            width: 180px;
+            height: 180px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .analog-clock::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0.1)
+            );
+            animation: rotate 10s linear infinite;
+            z-index: 1;
+        }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            background: white;
+            border-radius: 4px;
+            z-index: 2;
+        }
+        .hour-hand {
+            width: 4px;
+            height: 35%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .minute-hand {
+            width: 3px;
+            height: 40%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .second-hand {
+            width: 2px;
+            height: 45%;
+            background: #ff4444;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+        .center-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            z-index: 3;
+        }
+        .hour-marker {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform: rotate(var(--rotation));
+            z-index: 2;
+        }
+        .hour-marker::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            width: 2px;
+            height: 10px;
+            background: white;
+            transform: translateX(-50%);
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
