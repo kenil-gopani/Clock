@@ -27,7 +27,7 @@ Experience the Fancy Clock in action: [kenilgopanii.github.io](https://kenilgopa
 
 ## 📸 Screenshots
 
-<img src="https://i.ibb.co/W4X5K73r/Capture1.png" alt="Fancy Clock Screenshot" style="max-width: 100%; height: auto;">
+![Fancy Clock Screenshot](https://i.postimg.cc/C5hcNwQY/Capture1.png)
 
 
 ## 📂 Getting Started
